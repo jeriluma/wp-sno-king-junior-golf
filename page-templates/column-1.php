@@ -12,7 +12,14 @@
 <?php get_header(); ?>
  
 <div class="container">
-    <div class="row">
+    <h2><?php 
+        if($pagename == '') {
+            echo "Coaching for the Love of the Game";
+        } else {
+            echo $pagename;
+        }
+    ?></h2>
+    <div class="row content">
         <?php
             if($pagename == '') {
                 $pagename = 'home';

@@ -12,9 +12,16 @@
 <?php get_header(); ?>
  
 <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-lg-push-8 col-lg-4">
-            <ul ng-init="current = 0">
+    <h2><?php 
+        if($pagename == '') {
+            echo "Coaching for the Love of the Game";
+        } else {
+            echo $pagename;
+        }
+    ?></h2>
+    <div class="row content">
+        <div class="col-xs-12 col-md-push-8 col-md-4">
+            <ul ng-init="current = 0" class="local-nav">
                 <?php
                     if($pagename == '') {
                         $pagename = 'home';
@@ -24,7 +31,7 @@
                     query_posts($q);
                     $i = 0;
                     while (have_posts()) : the_post();
-                        ?> <li ng-click="current = <?php echo $i; ?>"> <?php   
+                        ?> <li ng-click="current = <?php echo $i; ?>" ng-class="{active : current == <?php echo $i; ?>}"> <?php   
                             the_title();
                         ?> </li> <?php   
                         $i++;
@@ -32,7 +39,8 @@
                 ?>
             </ul>
         </div>
-        <div class="col-xs-12 col-lg-pull-4 col-lg-8">
+        <div class="col-xs-12 col-md-pull-4 col-md-8">
+            <div class="row">
             <?php
                 if($pagename == '') {
                     $pagename = 'home';
@@ -42,13 +50,14 @@
                 query_posts($q);
                 $i = 0;
                 while (have_posts()) : the_post();
-                    ?> <div class="col-xs-12" ng-show="current == <?php echo $i; ?>"> <?php   
+                    ?> <div class="col-xs-12" ng-if="current == <?php echo $i; ?>"> <?php   
                         ?> <h3> <?php the_title(); ?> </h3> <?php   
                         ?> <p> <?php the_content(); ?> </p> <?php
                     ?> </div> <?php   
                     $i++;
                 endwhile;
             ?>
+            </div>
         </div>
     </div>
 </div>
